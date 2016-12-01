@@ -19,6 +19,7 @@ namespace PhotoRenamer
     public string FilePath { get; set; }
     public string NewName { get; set; }
     public MediaType Type { get; set; }
+    public bool IsDateReal { get; set; }
 
     public MediaFile(string filePath)
     {

@@ -41,7 +41,11 @@
       this.columnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnOldName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnNewName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.textDefaultName = new System.Windows.Forms.TextBox();
+      this.textDefaultDate = new System.Windows.Forms.TextBox();
       this.textProgress = new PhotoRenamer.ProgressBox();
+      this.labelDefaultDate = new System.Windows.Forms.Label();
+      this.labelCustomName = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // buttonAnalyze
@@ -63,10 +67,10 @@
             this.columnModel});
       this.listCameras.ForeColor = System.Drawing.SystemColors.WindowText;
       this.listCameras.LabelEdit = true;
-      this.listCameras.Location = new System.Drawing.Point(12, 52);
+      this.listCameras.Location = new System.Drawing.Point(12, 84);
       this.listCameras.MultiSelect = false;
       this.listCameras.Name = "listCameras";
-      this.listCameras.Size = new System.Drawing.Size(326, 402);
+      this.listCameras.Size = new System.Drawing.Size(312, 370);
       this.listCameras.TabIndex = 2;
       this.listCameras.TileSize = new System.Drawing.Size(10, 10);
       this.listCameras.UseCompatibleStateImageBehavior = false;
@@ -81,7 +85,7 @@
       // columnCamera
       // 
       this.columnCamera.Text = "Camera";
-      this.columnCamera.Width = 139;
+      this.columnCamera.Width = 127;
       // 
       // columnModel
       // 
@@ -117,10 +121,10 @@
             this.columnNewName});
       this.listFiles.ForeColor = System.Drawing.SystemColors.WindowText;
       this.listFiles.LabelEdit = true;
-      this.listFiles.Location = new System.Drawing.Point(344, 52);
+      this.listFiles.Location = new System.Drawing.Point(340, 84);
       this.listFiles.MultiSelect = false;
       this.listFiles.Name = "listFiles";
-      this.listFiles.Size = new System.Drawing.Size(598, 402);
+      this.listFiles.Size = new System.Drawing.Size(598, 370);
       this.listFiles.TabIndex = 3;
       this.listFiles.TileSize = new System.Drawing.Size(10, 10);
       this.listFiles.UseCompatibleStateImageBehavior = false;
@@ -146,20 +150,60 @@
       this.columnNewName.Text = "New name";
       this.columnNewName.Width = 199;
       // 
+      // textDefaultName
+      // 
+      this.textDefaultName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textDefaultName.Location = new System.Drawing.Point(692, 52);
+      this.textDefaultName.Name = "textDefaultName";
+      this.textDefaultName.Size = new System.Drawing.Size(249, 26);
+      this.textDefaultName.TabIndex = 5;
+      // 
+      // textDefaultDate
+      // 
+      this.textDefaultDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textDefaultDate.Location = new System.Drawing.Point(692, 18);
+      this.textDefaultDate.Name = "textDefaultDate";
+      this.textDefaultDate.Size = new System.Drawing.Size(246, 26);
+      this.textDefaultDate.TabIndex = 6;
+      // 
       // textProgress
       // 
       this.textProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textProgress.Location = new System.Drawing.Point(330, 15);
+      this.textProgress.Location = new System.Drawing.Point(12, 52);
       this.textProgress.Name = "textProgress";
       this.textProgress.ReadOnly = true;
-      this.textProgress.Size = new System.Drawing.Size(326, 26);
+      this.textProgress.Size = new System.Drawing.Size(312, 26);
       this.textProgress.TabIndex = 1;
+      // 
+      // labelDefaultDate
+      // 
+      this.labelDefaultDate.AutoSize = true;
+      this.labelDefaultDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelDefaultDate.Location = new System.Drawing.Point(484, 21);
+      this.labelDefaultDate.Name = "labelDefaultDate";
+      this.labelDefaultDate.Size = new System.Drawing.Size(202, 20);
+      this.labelDefaultDate.TabIndex = 7;
+      this.labelDefaultDate.Text = "Default date (gray lines)";
+      // 
+      // labelCustomName
+      // 
+      this.labelCustomName.AutoSize = true;
+      this.labelCustomName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelCustomName.Location = new System.Drawing.Point(469, 55);
+      this.labelCustomName.Name = "labelCustomName";
+      this.labelCustomName.Size = new System.Drawing.Size(212, 20);
+      this.labelCustomName.TabIndex = 8;
+      this.labelCustomName.Text = "Custom name (gray lines)";
       // 
       // formRenamer
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(953, 460);
+      this.Controls.Add(this.labelCustomName);
+      this.Controls.Add(this.labelDefaultDate);
+      this.Controls.Add(this.textDefaultDate);
+      this.Controls.Add(this.textDefaultName);
       this.Controls.Add(this.listCameras);
       this.Controls.Add(this.listFiles);
       this.Controls.Add(this.buttonAnalyze);
@@ -189,6 +233,10 @@
     private System.Windows.Forms.Button buttonSave;
     private ProgressBox textProgress;
     private System.Windows.Forms.ColumnHeader columnType;
+    private System.Windows.Forms.TextBox textDefaultName;
+    private System.Windows.Forms.TextBox textDefaultDate;
+    private System.Windows.Forms.Label labelDefaultDate;
+    private System.Windows.Forms.Label labelCustomName;
   }
 }
 

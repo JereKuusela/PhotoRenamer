@@ -45,6 +45,7 @@ namespace PhotoRenamer
       using (FileStream fs = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
       {
         file.Type = MediaType.Video;
+        file.IsDateReal = false;
         file.NewDate = File.GetLastWriteTime(file.FilePath);
         try
         {
@@ -56,7 +57,10 @@ namespace PhotoRenamer
           dummy = bm.CameraModel;
           file.Type = MediaType.Photo;
           if (bm.DateTaken != null)
+          {
+            file.IsDateReal = true;
             file.NewDate = DateTime.Parse(bm.DateTaken);
+          }
           camera = new Camera(bm);
           // NOTICE: Metadata is lost after closing the file.
         }

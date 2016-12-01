@@ -33,7 +33,7 @@ namespace PhotoRenamer
         return;
       Cameras = Analyzer.GetCamerasWithMediaFiles(sourceFolderBrowser.SelectedPath, textProgress);
       GUI.ShowCameras(Cameras, listCameras);
-      GUI.ShowFiles(Cameras, listFiles);
+      GUI.ShowFiles(Cameras, listFiles, textDefaultDate == null ? "" : textDefaultDate.Text);
     }
 
     private void listCameras_click(object sender, EventArgs e)
@@ -47,8 +47,8 @@ namespace PhotoRenamer
       GUI.CollectTags(Cameras, listCameras);
       if (GUI.CollectDates(Cameras, listFiles))
       {
-        Renamer.RenameFiles(Cameras, textProgress);
-        GUI.ShowFiles(Cameras, listFiles);
+        Renamer.RenameFiles(Cameras, textProgress, textDefaultName == null ? "" : textDefaultName.Text);
+        GUI.ShowFiles(Cameras, listFiles, textDefaultDate == null ? "" : textDefaultDate.Text);
       }
       else
         textProgress.Text = "Incorrect dates. Unable to rename.";
@@ -60,14 +60,18 @@ namespace PhotoRenamer
       if (sourceFolderBrowser.SelectedPath == "")
         return;
       if (GUI.CollectDates(Cameras, listFiles))
+      {
+        Renamer.RenameFiles(Cameras, textProgress, textDefaultName == null ? "" : textDefaultName.Text);
+        GUI.ShowFiles(Cameras, listFiles, textDefaultDate == null ? "" : textDefaultDate.Text);
         Saver.SaveFiles(sourceFolderBrowser.SelectedPath, Cameras, textProgress);
+      }
       else
         textProgress.Text = "Incorrect dates. Unable to save.";
     }
 
     private void listFiles_click(object sender, EventArgs e)
     {
-      if (listFiles.SelectedItems.Count > 0 && listFiles.SelectedItems[0].ForeColor != Color.Gray)
+      if (listFiles.SelectedItems.Count > 0)
         listFiles.SelectedItems[0].BeginEdit();
     }
   }

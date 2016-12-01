@@ -11,7 +11,7 @@ namespace PhotoRenamer
     /// Renames media files (inside cameras) based on their date.
     /// Without date, "NULL" is added to find those files easily.
     /// </summary>
-    static public void RenameFiles(List<Camera> cameras, ProgressBox progressBox)
+    static public void RenameFiles(List<Camera> cameras, ProgressBox progressBox, string defaultBame)
     {
       var fileCount = cameras.Sum(item => item.Files.Count);
       if (progressBox != null)
@@ -21,8 +21,10 @@ namespace PhotoRenamer
         foreach (var mediaFile in camera.Files)
         {
           Debug.Assert(File.Exists(mediaFile.FilePath));
-          if (mediaFile.NewDate.Ticks != 0)
+          if ((mediaFile.IsDateReal || defaultBame.Length == 0) && mediaFile.NewDate.Ticks > 0)
             mediaFile.NewName = mediaFile.NewDate.ToString(MediaFile.STRING_FORMAT);
+          else if (defaultBame.Length > 0)
+            mediaFile.NewName = defaultBame;
           else
             mediaFile.NewName = "NULL_" + Path.GetFileNameWithoutExtension(mediaFile.FilePath);
           if (camera.Tag.Length > 0)

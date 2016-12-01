@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace PhotoRenamer
     /// <summary>
     /// Puts media files to a given list view.
     /// </summary>
-    static public void ShowFiles(List<Camera> cameras, ListView view)
+    static public void ShowFiles(List<Camera> cameras, ListView view, string defaultDate)
     {
       view.Items.Clear();
       foreach (var camera in cameras)
@@ -56,6 +57,12 @@ namespace PhotoRenamer
         {
           var dateStr = mediaFile.NewDate.Ticks == 0 ? "" : mediaFile.NewDate.ToString(MediaFile.STRING_FORMAT);
           var item = new ListViewItem(dateStr);
+          if (!mediaFile.IsDateReal)
+          {
+            item.ForeColor = Color.Gray;
+            if (defaultDate.Length > 0)
+              item.Text = defaultDate;
+          }
           item.SubItems.Add(mediaFile.Type.ToString());
           item.SubItems.Add(Path.GetFileName(mediaFile.FilePath));
           item.SubItems.Add(mediaFile.NewName);
