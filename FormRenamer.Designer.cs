@@ -1,6 +1,6 @@
-﻿namespace Valokuva
+﻿namespace PhotoRenamer
 {
-  partial class Form1
+  partial class formRenamer
   {
     /// <summary>
     /// Required designer variable.
@@ -16,7 +16,7 @@
       if (disposing && (components != null))
       {
         components.Dispose();
-      }
+     } 
       base.Dispose(disposing);
     }
 
@@ -30,18 +30,18 @@
     {
       this.buttonAnalyze = new System.Windows.Forms.Button();
       this.sourceFolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-      this.cameraView = new System.Windows.Forms.ListView();
+      this.listCameras = new System.Windows.Forms.ListView();
       this.columnTag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnCamera = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnModel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.buttonRename = new System.Windows.Forms.Button();
       this.buttonSave = new System.Windows.Forms.Button();
-      this.listMedia = new System.Windows.Forms.ListView();
+      this.listFiles = new System.Windows.Forms.ListView();
       this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnOldName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnNewName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-      this.columnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-      this.textProgress = new Valokuva.ProgressBox();
+      this.textProgress = new PhotoRenamer.ProgressBox();
       this.SuspendLayout();
       // 
       // buttonAnalyze
@@ -53,34 +53,35 @@
       this.buttonAnalyze.TabIndex = 0;
       this.buttonAnalyze.Text = "Analyze";
       this.buttonAnalyze.UseVisualStyleBackColor = true;
-      this.buttonAnalyze.Click += new System.EventHandler(this.selectSourceButton_click);
+      this.buttonAnalyze.Click += new System.EventHandler(this.buttonAnalyze_click);
       // 
-      // cameraView
+      // listCameras
       // 
-      this.cameraView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+      this.listCameras.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnTag,
             this.columnCamera,
             this.columnModel});
-      this.cameraView.ForeColor = System.Drawing.SystemColors.WindowText;
-      this.cameraView.LabelEdit = true;
-      this.cameraView.Location = new System.Drawing.Point(12, 52);
-      this.cameraView.MultiSelect = false;
-      this.cameraView.Name = "cameraView";
-      this.cameraView.Size = new System.Drawing.Size(326, 402);
-      this.cameraView.TabIndex = 2;
-      this.cameraView.TileSize = new System.Drawing.Size(10, 10);
-      this.cameraView.UseCompatibleStateImageBehavior = false;
-      this.cameraView.View = System.Windows.Forms.View.Details;
-      this.cameraView.Click += new System.EventHandler(this.cameraView_click);
+      this.listCameras.ForeColor = System.Drawing.SystemColors.WindowText;
+      this.listCameras.LabelEdit = true;
+      this.listCameras.Location = new System.Drawing.Point(12, 52);
+      this.listCameras.MultiSelect = false;
+      this.listCameras.Name = "listCameras";
+      this.listCameras.Size = new System.Drawing.Size(326, 402);
+      this.listCameras.TabIndex = 2;
+      this.listCameras.TileSize = new System.Drawing.Size(10, 10);
+      this.listCameras.UseCompatibleStateImageBehavior = false;
+      this.listCameras.View = System.Windows.Forms.View.Details;
+      this.listCameras.Click += new System.EventHandler(this.listCameras_click);
       // 
       // columnTag
       // 
       this.columnTag.Text = "Tag";
+      this.columnTag.Width = 63;
       // 
       // columnCamera
       // 
       this.columnCamera.Text = "Camera";
-      this.columnCamera.Width = 138;
+      this.columnCamera.Width = 139;
       // 
       // columnModel
       // 
@@ -95,7 +96,7 @@
       this.buttonRename.TabIndex = 3;
       this.buttonRename.Text = "Rename";
       this.buttonRename.UseVisualStyleBackColor = true;
-      this.buttonRename.Click += new System.EventHandler(this.renameFilesButton_Click);
+      this.buttonRename.Click += new System.EventHandler(this.buttonRename_Click);
       // 
       // buttonSave
       // 
@@ -103,47 +104,47 @@
       this.buttonSave.Name = "buttonSave";
       this.buttonSave.Size = new System.Drawing.Size(100, 34);
       this.buttonSave.TabIndex = 4;
-      this.buttonSave.Text = "Rename + Sasve";
+      this.buttonSave.Text = "Rename + Save";
       this.buttonSave.UseVisualStyleBackColor = true;
       this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
       // 
-      // listMedia
+      // listFiles
       // 
-      this.listMedia.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+      this.listFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnDate,
             this.columnType,
             this.columnOldName,
             this.columnNewName});
-      this.listMedia.ForeColor = System.Drawing.SystemColors.WindowText;
-      this.listMedia.LabelEdit = true;
-      this.listMedia.Location = new System.Drawing.Point(344, 52);
-      this.listMedia.MultiSelect = false;
-      this.listMedia.Name = "listMedia";
-      this.listMedia.Size = new System.Drawing.Size(598, 402);
-      this.listMedia.TabIndex = 3;
-      this.listMedia.TileSize = new System.Drawing.Size(10, 10);
-      this.listMedia.UseCompatibleStateImageBehavior = false;
-      this.listMedia.View = System.Windows.Forms.View.Details;
-      this.listMedia.Click += new System.EventHandler(this.listMedia_Click);
+      this.listFiles.ForeColor = System.Drawing.SystemColors.WindowText;
+      this.listFiles.LabelEdit = true;
+      this.listFiles.Location = new System.Drawing.Point(344, 52);
+      this.listFiles.MultiSelect = false;
+      this.listFiles.Name = "listFiles";
+      this.listFiles.Size = new System.Drawing.Size(598, 402);
+      this.listFiles.TabIndex = 3;
+      this.listFiles.TileSize = new System.Drawing.Size(10, 10);
+      this.listFiles.UseCompatibleStateImageBehavior = false;
+      this.listFiles.View = System.Windows.Forms.View.Details;
+      this.listFiles.Click += new System.EventHandler(this.listFiles_click);
       // 
       // columnDate
       // 
       this.columnDate.Text = "Date";
-      this.columnDate.Width = 108;
-      // 
-      // columnOldName
-      // 
-      this.columnOldName.Text = "Old name";
-      this.columnOldName.Width = 125;
-      // 
-      // columnNewName
-      // 
-      this.columnNewName.Text = "New name";
-      this.columnNewName.Width = 125;
+      this.columnDate.Width = 117;
       // 
       // columnType
       // 
       this.columnType.Text = "Type";
+      // 
+      // columnOldName
+      // 
+      this.columnOldName.Text = "Old name";
+      this.columnOldName.Width = 149;
+      // 
+      // columnNewName
+      // 
+      this.columnNewName.Text = "New name";
+      this.columnNewName.Width = 199;
       // 
       // textProgress
       // 
@@ -154,20 +155,20 @@
       this.textProgress.Size = new System.Drawing.Size(326, 26);
       this.textProgress.TabIndex = 1;
       // 
-      // Form1
+      // formRenamer
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1424, 529);
-      this.Controls.Add(this.cameraView);
-      this.Controls.Add(this.listMedia);
+      this.ClientSize = new System.Drawing.Size(953, 460);
+      this.Controls.Add(this.listCameras);
+      this.Controls.Add(this.listFiles);
       this.Controls.Add(this.buttonAnalyze);
       this.Controls.Add(this.buttonSave);
       this.Controls.Add(this.textProgress);
       this.Controls.Add(this.buttonRename);
-      this.Name = "Form1";
-      this.Text = "Form1";
-      this.Load += new System.EventHandler(this.Form1_Load);
+      this.Name = "formRenamer";
+      this.Text = "Photo Renamer";
+      this.Load += new System.EventHandler(this.FormRenamer_load);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -176,12 +177,12 @@
     #endregion
     private System.Windows.Forms.Button buttonAnalyze;
     private System.Windows.Forms.FolderBrowserDialog sourceFolderBrowser;
-    private System.Windows.Forms.ListView cameraView;
+    private System.Windows.Forms.ListView listCameras;
     private System.Windows.Forms.ColumnHeader columnTag;
     private System.Windows.Forms.ColumnHeader columnCamera;
     private System.Windows.Forms.ColumnHeader columnModel;
     private System.Windows.Forms.Button buttonRename;
-    private System.Windows.Forms.ListView listMedia;
+    private System.Windows.Forms.ListView listFiles;
     private System.Windows.Forms.ColumnHeader columnDate;
     private System.Windows.Forms.ColumnHeader columnOldName;
     private System.Windows.Forms.ColumnHeader columnNewName;

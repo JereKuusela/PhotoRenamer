@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-namespace Valokuva
+namespace PhotoRenamer
 {
   public enum MediaType
   {
     None, Image, Photo, Video
   }
 
+  /// <summary>
+  /// A struct representing an image, a photo or a video. Includes necessary information to do the rename.
+  /// Photos are image files with a date value. Technically videos could include date but unfortunately it's not stored.
+  /// </summary>
   public class MediaFile
   {
     public static string STRING_FORMAT = "yyyy-MM-dd_HH-mm-ss";
@@ -24,7 +23,7 @@ namespace Valokuva
     public MediaFile(string filePath)
     {
       FilePath = filePath;
-      NewName = Path.GetFileName(FilePath);
+      NewName = "";
     }
   }
 }

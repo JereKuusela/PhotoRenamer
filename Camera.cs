@@ -1,30 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
-namespace Valokuva
+namespace PhotoRenamer
 {
-  public class CameraInfo
+  /// <summary>
+  /// A struct representing a camera and its files. Dummy cameras used for files without the camera information.
+  /// </summary>
+  public class Camera
   {
+    /// <summary>
+    /// Camera manufacter directly from the metadata. For images and videos, file extension is used to give some information.
+    /// </summary>
     public string Manufacter { get; set; }
+    /// <summary>
+    /// Camera model directly from the metadata. For images and videos, first letters from the file name are used to give some information.
+    /// </summary>
     public string Model { get; set; }
+    /// <summary>
+    /// Media files taken with this camera.
+    /// </summary>
     public List<MediaFile> Files;
+    /// <summary>
+    /// Tag for this camera which gets applied to the file names of its files.
+    /// </summary>
     public string Tag { get; set; }
 
-    public CameraInfo(string manufacter, string model)
+    public Camera(string manufacter, string model)
     {
       Debug.Assert(manufacter != null);
       Debug.Assert(model != null);
       Manufacter = manufacter;
       Model = model;
       Files = new List<MediaFile>();
+      Tag = "";
     }
 
-    public CameraInfo(BitmapMetadata metaData)
+    public Camera(BitmapMetadata metaData)
     {
       if (metaData != null)
       {
@@ -36,11 +48,12 @@ namespace Valokuva
       if (Model == null)
         Model = "None";
       Files = new List<MediaFile>();
+      Tag = "";
     }
 
     public override bool Equals(object obj)
     {
-      CameraInfo objCam = (CameraInfo)obj;
+      Camera objCam = (Camera)obj;
       if (objCam == null)
         return false;
       return objCam.Manufacter.Equals(Manufacter) && objCam.Model.Equals(Model);

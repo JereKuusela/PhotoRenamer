@@ -4,20 +4,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 
-namespace Valokuva
+namespace PhotoRenamer
 {
   static public class Analyzer
   {
     /// <summary>
-    /// Analyzes medial files from a given path and returns relevant information.
+    /// Analyzes media files and returns them inside their cameras.
     /// </summary>
-    /// <returns>Found cameras with media files inside them.</returns>
-    static public List<CameraInfo> GetCamerasWithMediaFiles(string path, ProgressBox progressBox)
+    static public List<Camera> GetCamerasWithMediaFiles(string path, ProgressBox progressBox)
     {
-      var cameras = new List<CameraInfo>();
+      var cameras = new List<Camera>();
       Debug.Assert(Directory.Exists(path));
       var filePaths = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories);
       if (progressBox != null)
@@ -37,10 +35,13 @@ namespace Valokuva
       return cameras;
     }
 
-    static private CameraInfo Analyze(MediaFile file)
+    /// <summary>
+    /// Analyzes a given media file setting its attributes and returning camera information.
+    /// </summary>
+    static private Camera Analyze(MediaFile file)
     {
       file.Type = MediaType.None;
-      CameraInfo camera;
+      Camera camera;
       using (FileStream fs = new FileStream(file.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
       {
         file.Type = MediaType.Video;
@@ -56,12 +57,12 @@ namespace Valokuva
           file.Type = MediaType.Photo;
           if (bm.DateTaken != null)
             file.NewDate = DateTime.Parse(bm.DateTaken);
-          camera = new CameraInfo(bm);
+          camera = new Camera(bm);
           // NOTICE: Metadata is lost after closing the file.
         }
         catch (NotSupportedException)
         {
-          camera = new CameraInfo("Format: " + Path.GetExtension(file.FilePath), Regex.Replace(Path.GetFileName(file.FilePath), @"(\p{L}+).*", "$1"));
+          camera = new Camera("Format: " + Path.GetExtension(file.FilePath), Regex.Replace(Path.GetFileName(file.FilePath), @"(\p{L}+).*", "$1"));
         }
       }
       file.OldDate = file.NewDate;
